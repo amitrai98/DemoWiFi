@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="wifi_image_padding">20dp</dimen>
+    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+    <dimen name="wifi_image_ht">100dp</dimen>
+    <dimen name="card_top_margin">5dp</dimen>
+    <dimen name="txt_info_padding">2dp</dimen>
+</resources>
