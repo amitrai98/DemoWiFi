@@ -3,6 +3,10 @@ package com.evontech.demo.demowifi.ui;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -27,17 +32,23 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private WifiAdapter mAdapter = null;
     private List<ScanResult> mScanResults = new ArrayList<>();
+    private FloatingActionButton floating_scan_button = null;
+    private ConstraintLayout coordinatorLayout = null;
+    private  Snackbar snackbar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recycler_wifi = findViewById(R.id.recycler_wifi);
-
+        floating_scan_button = findViewById(R.id.floating_scan_button);
+        coordinatorLayout = findViewById(R.id.coordinatorLayout);
         askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
     private void init(){
+
+
         AppUtility appUtility = new AppUtility();
         appUtility.getWifiList(this, this);
         mAdapter = new WifiAdapter(mScanResults);
@@ -45,6 +56,25 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
         recycler_wifi.setLayoutManager(mLayoutManager);
         recycler_wifi.setItemAnimator(new DefaultItemAnimator());
         recycler_wifi.setAdapter(mAdapter);
+
+        floating_scan_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startScan();
+
+            }
+        });
+    }
+
+
+    private void startScan(){
+        snackbar = Snackbar
+                .make(coordinatorLayout, "Scanning Network Please Wait", Snackbar.LENGTH_LONG);
+
+        snackbar.show();
+        mScanResults.clear();
+        mAdapter.notifyDataSetChanged();
+        askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
 
@@ -101,8 +131,13 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
 
     @Override
     public void onScanCompleted(List<ScanResult> mScanResults) {
+
         this.mScanResults.clear();
         this.mScanResults.addAll(mScanResults);
         mAdapter.notifyDataSetChanged();
+
+        if(snackbar != null && snackbar.isShown()){
+            snackbar.dismiss();
+        }
     }
 }
