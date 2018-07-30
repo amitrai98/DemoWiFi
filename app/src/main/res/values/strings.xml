@@ -4,4 +4,7 @@
     <string name="text_location_permission">In order to get list of wifi location permission is required</string>
     <string name="ok">OK</string>
     <string name="network_name">Network Name</string>
+    <string name="wifi_wps_failed_overlap">wps failed</string>
+    <string name="wifi_wps_failed_wep">connectivity failed</string>
+    <string name="wifi_wps_failed_tkip">connectivity failed</string>
 </resources>

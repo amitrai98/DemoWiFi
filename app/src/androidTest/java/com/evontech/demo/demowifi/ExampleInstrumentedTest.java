@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.evontech.demo.demowifi", appContext.getPackageName());
+        assertEquals("com.evontech.demo.Demowifi", appContext.getPackageName());
     }
 }

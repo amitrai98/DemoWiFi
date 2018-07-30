@@ -40,4 +40,9 @@ public class AppUtility {
             }
         }
     };
+
+
+    public void connectToWifiUsingPin(){
+
+    }
 }
