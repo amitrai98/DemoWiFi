@@ -13,5 +13,6 @@ public class WifiScanViewModel extends BaseViewModel<WifiScanNavigator> {
 
     public void scanWifiNetworks(){
         Log.e(TAG, "i was called");
+        getCompositeDisposable().add(Ap)
     }
 }
