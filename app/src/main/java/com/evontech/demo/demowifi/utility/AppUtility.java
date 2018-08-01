@@ -42,7 +42,13 @@ public class AppUtility {
     };
 
 
-    public void connectToWifiUsingPin(){
-
+    public String connectToWifiUsingPin(){
+        try {
+            Thread.sleep(1000);
+            return "from thread";
+        }catch (Exception exp){
+            exp.printStackTrace();
+            return  "in catch";
+        }
     }
 }
