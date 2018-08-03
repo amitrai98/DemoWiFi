@@ -29,9 +29,6 @@ public class WifiScanViewModel extends BaseViewModel<WifiScanNavigator> implemen
         super();
     }
 
-    @Inject
-    Demowifi mWifiscan;
-
     @SuppressLint("CheckResult")
     public void scanWifiNetworks(){
         Log.e(TAG, "i was called");
@@ -40,7 +37,7 @@ public class WifiScanViewModel extends BaseViewModel<WifiScanNavigator> implemen
 
             try {
                 AppUtility utility = new AppUtility();
-                utility.getWifiList(mWifiscan.getApplicationContext(), WifiScanViewModel.this);
+                utility.getWifiList(Demowifi.getAppContext(), WifiScanViewModel.this);
                 return "executed";
             } catch (Exception e) {
                 Log.e("Network request", "Failure", e);

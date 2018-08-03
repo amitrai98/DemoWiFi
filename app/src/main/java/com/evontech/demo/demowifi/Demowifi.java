@@ -12,11 +12,17 @@ import dagger.android.HasActivityInjector;
 
 public class Demowifi extends Application implements HasActivityInjector {
 
+    private static Demowifi demowifi = null;
+
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
 //    @Inject
 //    CalligraphyConfig mCalligraphyConfig;
+
+    public static Demowifi getAppContext(){
+        return demowifi;
+    }
 
     @Override
     public DispatchingAndroidInjector<Activity> activityInjector() {
@@ -26,6 +32,7 @@ public class Demowifi extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
+        demowifi = this;
 
         DaggerAppComponent.builder()
                 .application(this)
