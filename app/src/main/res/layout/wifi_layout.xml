@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="WifiScanData"
+            type="com.evontech.demo.demowifi.ui.adapters.wifiadapter.WifiScanItemViewModel"/>
+    </data>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,7 +50,7 @@
                         android:layout_weight="1"
                         android:gravity="left"
                         android:padding="@dimen/txt_info_padding"
-                        android:text="@string/network_name"/>
+                        android:text="@{WifiScanData.scanresult.}"/>
 
 
                     <TextView
@@ -108,3 +115,4 @@
         </LinearLayout>>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>
+</layout>

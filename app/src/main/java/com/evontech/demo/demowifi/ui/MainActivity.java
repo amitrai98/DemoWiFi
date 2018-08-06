@@ -19,7 +19,6 @@ import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import com.evontech.demo.demowifi.R;
-import com.evontech.demo.demowifi.ui.adapters.WifiAdapter;
 import com.evontech.demo.demowifi.ui.listeners.WiFiScanListener;
 import com.evontech.demo.demowifi.utility.AppUtility;
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
 
     private RecyclerView recycler_wifi = null;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-    private WifiAdapter mAdapter = null;
+//    private WifiAdapter mAdapter = null;
     private List<ScanResult> mScanResults = new ArrayList<>();
     private FloatingActionButton floating_scan_button = null;
     private ConstraintLayout coordinatorLayout = null;
@@ -51,11 +50,9 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
 
         AppUtility appUtility = new AppUtility();
         appUtility.getWifiList(this, this);
-        mAdapter = new WifiAdapter(mScanResults);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recycler_wifi.setLayoutManager(mLayoutManager);
         recycler_wifi.setItemAnimator(new DefaultItemAnimator());
-        recycler_wifi.setAdapter(mAdapter);
 
         floating_scan_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
 
         snackbar.show();
         mScanResults.clear();
-        mAdapter.notifyDataSetChanged();
         askForPermission(Manifest.permission.ACCESS_FINE_LOCATION, MY_PERMISSIONS_REQUEST_LOCATION);
     }
 
@@ -134,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements WiFiScanListener 
 
         this.mScanResults.clear();
         this.mScanResults.addAll(mScanResults);
-        mAdapter.notifyDataSetChanged();
 
         if(snackbar != null && snackbar.isShown()){
             snackbar.dismiss();
